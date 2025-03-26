@@ -1,11 +1,45 @@
 <div class="containerGeneral">
   <div class="containerTable">
-    @for (hero of heroes(); track hero.id) {
-      <div>
-        <h3>{{ hero.name }}</h3>
-        <button (click)="deleteHero(hero.id)">Eliminar</button>
+    <input 
+      matInput 
+      type="text" 
+      placeholder="Search by ID or Name..." 
+      (input)="handleSearch($event)"
+    />
+
+    <div class="titles">
+      <div class="titles_id">ID</div>
+      <div class="titles_name">Name</div>
+    </div>
+
+    @for (hero of paginatedHeroes(); track hero.id) {
+      <div class="item">
+        <div class="item_id">{{ hero.id }}</div>
+        <div class="item_name">{{ hero.name }}</div>
+        <div class="item_actions">
+          <button (click)="deleteHero(hero.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button (click)="updateHero(hero.id, hero)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    }
+
+    @if(getTotalHeroes() > 0) {
+      <mat-paginator 
+        (page)="handlePageEvent($event)"
+        [hidePageSize]="true"
+        aria-label="Select page"
+        [pageIndex]="pageIndex()"
+        [length]="getTotalHeroes()"
+        [pageSize]="pageSize()">
+      </mat-paginator>
+    } @else {
+      <div class="containerGeneral">
+        <p>There are no heroes available..</p>
       </div>
     }
   </div>
 </div>
-

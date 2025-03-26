@@ -3,11 +3,11 @@ import { HeroTableComponent } from '../heroes/components/hero-table/hero-table.c
 
 @Component({
   selector: 'app-home',
-  imports: [HeroTableComponent],
-  standalone: true,
+  imports: [ HeroTableComponent ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  standalone: true,
 })
 export class HomeComponent {
-
+  
 }
