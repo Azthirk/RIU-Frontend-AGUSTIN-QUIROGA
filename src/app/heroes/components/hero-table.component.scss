@@ -1,0 +1,16 @@
+.containerGeneral{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.containerTable{
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
+    background-color: red;
+}
