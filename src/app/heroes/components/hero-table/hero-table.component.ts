@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeroService } from '../services/hero.service';
-import { Hero } from '../models/hero.model';
+import { HeroService } from '../../services/hero.service';
+import { Hero } from '../../models/hero.model';
 
 @Component({
   selector: 'app-hero-table',

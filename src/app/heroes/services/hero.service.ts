@@ -6,9 +6,9 @@ import { Hero } from '../models/hero.model';
 })
 export class HeroService {
     private heroes = signal<Hero[]>([
-        { id: 1, name: 'Spiderman', active: true },
-        { id: 2, name: 'Iron Man', active: true},
-        { id: 3, name: 'Thor', active: true}
+        { id: 1, name: 'Spiderman' },
+        { id: 2, name: 'Iron Man' },
+        { id: 3, name: 'Thor' }
     ]);
 
     registerHero(hero: Hero): void {

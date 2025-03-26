@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { HeroTableComponent } from './heroes/components/hero-table.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: HeroTableComponent },
-  { path: '**', redirectTo: '' }
+  { path: '', component: HomeComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
