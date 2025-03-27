@@ -1,3 +1,14 @@
+::ng-deep {
+    .mat-mdc-paginator-range-label,
+    .mat-mdc-form-field-infix,
+    .mat-mdc-form-field-error,
+    .mdc-floating-label,
+    .mdc-button__label,
+    .mat-mdc-tooltip-surface {
+        font-family: 'Roboto', "Helvetica Neue", sans-serif !important;
+    }
+}
+
 .container{
     display: flex;
     flex-direction: column;
