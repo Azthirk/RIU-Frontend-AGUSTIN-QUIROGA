@@ -57,3 +57,23 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Docker
+
+Build application
+
+```bash
+ng build --configuration=production
+```
+
+Build image
+
+```bash
+docker build -t heroes-app .
+```
+
+Run image
+
+```bash
+docker run -d -it -p 80:80 heroes-app
+```
