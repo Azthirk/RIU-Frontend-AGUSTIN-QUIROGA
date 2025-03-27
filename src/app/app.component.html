@@ -1,2 +1,10 @@
 <app-hero-header></app-hero-header>
-<router-outlet></router-outlet>
+@if(loadingService.isLoading()){
+    <div class="interceptor">
+        <div class="loading">
+            <p>Loading...</p>
+        </div>
+    </div>
+}@else{
+    <router-outlet></router-outlet>
+}

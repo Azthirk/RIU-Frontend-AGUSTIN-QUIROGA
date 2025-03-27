@@ -7,6 +7,7 @@
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input 
+            appToUpperCase
             matInput 
             formControlName="name">
             @if (formGeneral.controls['name'].hasError('required')) {

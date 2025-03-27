@@ -15,34 +15,44 @@
       <div class="titles_description">Description</div>
     </div>
 
-    @for (hero of paginatedHeroes(); track hero.id) {
-      <div class="item">
-        <div class="item_id">{{ hero.id }}</div>
-        <div class="item_name">{{ hero.name }}</div>
-        <div class="item_description">{{ hero.description ? hero.description : '-' }}</div>
-        <div class="item_actions">
-          <mat-icon mat-icon class="item_actions_edit" (click)="redirectToUrl('/edit/', hero)" matTooltip="Edit Hero"> 
-            edit
-          </mat-icon>
-          <mat-icon mat-button class="item_actions_delete" (click)="viewModal(hero)" matTooltip="Delete Hero">
-            delete
-          </mat-icon>
+    @defer (on viewport) {
+      @for (hero of paginatedHeroes(); track hero.id) {
+        <div class="item">
+          <div class="item_id">{{ hero.id }}</div>
+          <div class="item_name">{{ hero.name }}</div>
+          <div class="item_description">{{ hero.description ? hero.description : '-' }}</div>
+          <div class="item_actions">
+            <mat-icon mat-icon class="item_actions_edit" (click)="redirectToUrl('/edit/', hero)" matTooltip="Edit Hero"> 
+              edit
+            </mat-icon>
+            <mat-icon mat-button class="item_actions_delete" (click)="viewModal(hero)" matTooltip="Delete Hero">
+              delete
+            </mat-icon>
+          </div>
         </div>
-      </div>
-    }
+      }
 
-    @if(getTotalHeroes() > 0) {
-      <mat-paginator 
-        (page)="handlePageEvent($event)"
-        [hidePageSize]="true"
-        aria-label="Select page"
-        [pageIndex]="pageIndex()"
-        [length]="getTotalHeroes()"
-        [pageSize]="pageSize()">
-      </mat-paginator>
-    } @else {
+      @if(getTotalHeroes() > 0) {
+        <mat-paginator 
+          (page)="handlePageEvent($event)"
+          [hidePageSize]="true"
+          aria-label="Select page"
+          [pageIndex]="pageIndex()"
+          [length]="getTotalHeroes()"
+          [pageSize]="pageSize()">
+        </mat-paginator>
+      } @else {
+        <div class="containerBottom">
+          <p>There are no heroes available.</p>
+        </div>
+      }
+    } @placeholder {
       <div class="containerBottom">
-        <p>There are no heroes available.</p>
+        <p>Loading...</p>
+      </div>
+    } @error {
+      <div class="containerBottom">
+        <p>Error.</p>
       </div>
     }
   </div>

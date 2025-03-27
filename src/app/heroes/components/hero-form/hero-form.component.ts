@@ -5,10 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { Hero } from '../../models/hero.model';
 import { HeroService } from '../../services/hero.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UppercaseDirective } from '../../../shared/directives/uppercase.directive';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-hero-form',
-  imports: [ MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule ],
+  imports: [ MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, UppercaseDirective ],
   templateUrl: './hero-form.component.html',
   styleUrl: './hero-form.component.scss',
   standalone: true,
