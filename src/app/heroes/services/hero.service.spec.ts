@@ -51,5 +51,4 @@ describe('HeroService', () => {
     expect(heroes.length).toBe(1);
     expect(heroes[0].name).toBe('Spiderman');
   });
-
 });
