@@ -7,7 +7,7 @@ import { Hero } from '../models/hero.model';
 export class HeroService {
     private heroes = signal<Hero[]>([
         { id: 1, name: 'Spiderman' },
-        { id: 2, name: 'Iron Man' },
+        { id: 2, name: 'Iron Man', description: 'test' },
         { id: 3, name: 'Thor' }
     ]);
 

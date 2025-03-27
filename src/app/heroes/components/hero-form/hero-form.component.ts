@@ -20,20 +20,21 @@ export class HeroFormComponent implements OnInit {
 
   formGeneral: FormGroup;
 
+  existingIds: () => Hero[];
+
   constructor(
     private heroService: HeroService, 
     private route: ActivatedRoute,
     private router: Router
   ){
+    this.existingIds = this.heroService.getHeroes();
     this.formGeneral = new FormGroup({
       id: new FormControl({value: '', disabled: true }),
       name: new FormControl('', [Validators.required]),
       description: new FormControl('')
     })
 
-    this.route.paramMap.subscribe(params => {
-      this.heroId.set(params.get('id'));
-    });
+    this.heroId.set(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit() {
@@ -44,18 +45,32 @@ export class HeroFormComponent implements OnInit {
         this.formGeneral.controls['name'].setValue(this.heroData.name);
         this.formGeneral.controls['description'].setValue(this.heroData.description);
       }
+    }else{
+      const newID = this.generateUniqueId();
+      this.formGeneral.controls['id'].setValue(newID);
     }
   }
 
+  generateUniqueId(): number {
+    const existingIds = new Set(this.existingIds().map(hero => hero.id));
+  
+    let newId: number;
+    do {
+      newId = Math.floor(Math.random() * 999) + 1;
+    } while (existingIds.has(newId));
+  
+    return newId;
+  };
+
   createOrUpdate(){
-    if(this.formGeneral.invalid) return;
+    if(this.formGeneral.invalid || !this.formGeneral.dirty) return;
     const heroItem: Hero = this.formGeneral.getRawValue();
     if(this.heroId()){
       this.heroService.updateHero(heroItem.id, heroItem);
     }else{
       this.heroService.createHero(heroItem);
     }
-    this.redirectToUrl('/home')
+    this.redirectToUrl('home')
   }
 
   redirectToUrl(url: string): void {

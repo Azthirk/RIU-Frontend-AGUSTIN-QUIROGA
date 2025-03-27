@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class HeroTableComponent {
   heroes: () => Hero[];
 
-  pageSize = signal(2);
+  pageSize = signal(10);
   
   pageIndex = signal(0);
   

@@ -27,13 +27,13 @@
     <div class="buttons">
         <button 
             mat-stroked-button 
-            (click)="redirectToUrl('/home')">
+            (click)="redirectToUrl('home')">
             Cancel
         </button>
         <button 
             mat-flat-button 
             (click)="createOrUpdate()" 
-            [disabled]="formGeneral.invalid">
+            [disabled]="formGeneral.invalid || !formGeneral.dirty">
             {{ heroData?.id ? 'Update' : 'Create'}}
         </button>
     </div>

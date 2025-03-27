@@ -12,12 +12,14 @@
     <div class="titles">
       <div class="titles_id">ID</div>
       <div class="titles_name">Name</div>
+      <div class="titles_description">Description</div>
     </div>
 
     @for (hero of paginatedHeroes(); track hero.id) {
       <div class="item">
         <div class="item_id">{{ hero.id }}</div>
         <div class="item_name">{{ hero.name }}</div>
+        <div class="item_description">{{ hero.description ? hero.description : '-' }}</div>
         <div class="item_actions">
           <mat-icon mat-icon class="item_actions_edit" (click)="redirectToUrl('/edit/', hero)" matTooltip="Edit Hero"> 
             edit
