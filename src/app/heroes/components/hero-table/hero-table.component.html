@@ -1,12 +1,14 @@
 <div class="containerGeneral">
-  <div class="containerTable">
-    <input 
-      matInput 
+  <div class="containerFilters">
+    <input
+      class="filter"
       type="text" 
-      placeholder="Search by ID or Name..." 
+      placeholder="ID or Name" 
       (input)="handleSearch($event)"
     />
+  </div>
 
+  <div class="containerTable">
     <div class="titles">
       <div class="titles_id">ID</div>
       <div class="titles_name">Name</div>
@@ -17,12 +19,12 @@
         <div class="item_id">{{ hero.id }}</div>
         <div class="item_name">{{ hero.name }}</div>
         <div class="item_actions">
-          <button (click)="deleteHero(hero.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-          <button (click)="updateHero(hero.id, hero)">
-            <mat-icon>edit</mat-icon>
-          </button>
+          <mat-icon mat-icon class="item_actions_edit" (click)="redirectToUrl('/edit/', hero)" matTooltip="Edit Hero"> 
+            edit
+          </mat-icon>
+          <mat-icon mat-button class="item_actions_delete" (click)="viewModal(hero)" matTooltip="Delete Hero">
+            delete
+          </mat-icon>
         </div>
       </div>
     }
@@ -37,9 +39,16 @@
         [pageSize]="pageSize()">
       </mat-paginator>
     } @else {
-      <div class="containerGeneral">
-        <p>There are no heroes available..</p>
+      <div class="containerBottom">
+        <p>There are no heroes available.</p>
       </div>
     }
   </div>
 </div>
+
+@if(showModal){
+  <app-hero-modal
+      (closeModal)="modalFunction($event)"
+      [heroData]="itemSelected"
+  />
+}

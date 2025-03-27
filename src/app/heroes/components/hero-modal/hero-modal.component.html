@@ -1,1 +1,18 @@
-<p>hero-modal works!</p>
+<div class="containerGeneral">
+    <div class="containerModal">
+        <div class="containerModal_exit" (click)="close(false)">
+            <p>x</p>
+        </div>
+        <div class="containerModal_text">
+            @if(heroData?.id){
+                <p>Are you sure you want to delete {{ heroData?.name }}?</p>
+            }@else{
+                <p>Are you sure you want to perform this action?</p>
+            }
+        </div>
+        <div class="containerModal_buttons">
+            <button mat-stroked-button (click)="close(false)">No</button>
+            <button mat-flat-button (click)="close(true)">Yes</button>
+        </div>
+    </div>
+</div>

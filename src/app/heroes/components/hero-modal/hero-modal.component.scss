@@ -1,0 +1,50 @@
+.containerGeneral {
+    position: fixed; 
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 100;
+}
+
+.containerModal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border-radius: 16px;
+        
+    &_exit{
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        margin-right: 50px;
+        height: 20px;
+        font-size: 24px;
+        font-weight: 100;
+        cursor: pointer;
+    }
+
+    &_text{
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        font-size: 15px;
+    }
+
+    &_buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        gap: 24px;
+        align-items: center;
+        margin-top: 25px;
+    }
+}

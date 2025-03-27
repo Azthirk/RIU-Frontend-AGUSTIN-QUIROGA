@@ -1,0 +1,29 @@
+.header{
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: #007bff;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    color: white;
+
+    &_items{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        margin-left: 24px;
+        margin-right: 24px;
+        width: 100%;
+    }
+
+    &_add{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+}

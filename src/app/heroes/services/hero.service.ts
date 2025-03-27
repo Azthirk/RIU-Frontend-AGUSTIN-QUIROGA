@@ -11,7 +11,7 @@ export class HeroService {
         { id: 3, name: 'Thor' }
     ]);
 
-    registerHero(hero: Hero): void {
+    createHero(hero: Hero): void {
         this.heroes.update((currentHeroes) => [...currentHeroes, hero]);
     }
 
@@ -29,11 +29,12 @@ export class HeroService {
         return this.heroes;
     }
 
-    getHeroById(id: number): Hero | undefined {
-        return this.heroes().find((hero) => hero.id === id);
+    getHeroById(id: number): Hero | null {
+        const value = this.heroes().find((hero) => hero.id === id);
+        return value || null;
     }
 
     getHeroByName(name: string): Hero[] {
-        return this.heroes().filter((hero) => hero.name.toLowerCase()?.includes(name.toLowerCase()));
+        return this.heroes().filter((hero) => hero.name.toLowerCase().includes(name.toLowerCase()));
     }
 }

@@ -1,1 +1,40 @@
-<p>hero-form works!</p>
+<div class="containerGeneral">
+    <form class="form" [formGroup]="formGeneral">
+        <mat-form-field>
+            <mat-label>Id</mat-label>
+            <input matInput formControlName="id">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input 
+            matInput 
+            formControlName="name">
+            @if (formGeneral.controls['name'].hasError('required')) {
+                <mat-error>Please enter a valid name</mat-error>
+            }
+            @if (formGeneral.hasError('required')) {
+                <mat-error>Name is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea 
+                matInput 
+                formControlName="description">
+            </textarea>
+        </mat-form-field>
+    </form>
+    <div class="buttons">
+        <button 
+            mat-stroked-button 
+            (click)="redirectToUrl('/home')">
+            Cancel
+        </button>
+        <button 
+            mat-flat-button 
+            (click)="createOrUpdate()" 
+            [disabled]="formGeneral.invalid">
+            {{ heroData?.id ? 'Update' : 'Create'}}
+        </button>
+    </div>
+</div>
