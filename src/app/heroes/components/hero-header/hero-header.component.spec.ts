@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeroHeaderComponent } from './hero-header.component';
+import { Router } from '@angular/router';
 
 describe('HeroHeaderComponent', () => {
   let component: HeroHeaderComponent;
   let fixture: ComponentFixture<HeroHeaderComponent>;
+  let mockRouter: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
+    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+
     await TestBed.configureTestingModule({
-      imports: [HeroHeaderComponent]
+      imports: [HeroHeaderComponent ],
+      providers: [
+        { provide: Router, useValue: mockRouter }
+      ]
     })
     .compileComponents();
 
@@ -19,5 +25,11 @@ describe('HeroHeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should navigate to the correct URL when redirectToUrl is called', () => {
+    const url = 'edit';
+    component.redirectToUrl(url);
+    expect(mockRouter.navigate).toHaveBeenCalledWith([url]);
   });
 });

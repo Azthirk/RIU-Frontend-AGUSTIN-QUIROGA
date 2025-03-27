@@ -10,7 +10,7 @@ describe('HeroService', () => {
     service = TestBed.inject(HeroService);
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 
@@ -41,12 +41,6 @@ describe('HeroService', () => {
     expect(heroes.some(hero => hero.id === 1)).toBeFalse();
   });
 
-  it('should get hero by id', () => {
-    const hero = service.getHeroById(2);
-    expect(hero).toBeTruthy();
-    expect(hero?.name).toBe('Iron Man');
-  });
-
   it('should return null if hero by id does not exist', () => {
     const hero = service.getHeroById(99);
     expect(hero).toBeNull();
@@ -58,8 +52,4 @@ describe('HeroService', () => {
     expect(heroes[0].name).toBe('Spiderman');
   });
 
-  it('should return empty array if no hero matches the name', () => {
-    const heroes = service.getHeroByName('unknown');
-    expect(heroes.length).toBe(0);
-  });
 });

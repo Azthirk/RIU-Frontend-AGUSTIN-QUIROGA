@@ -1,7 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { version, name } from '../../package.json';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loadingInterceptor } from './shared/interceptor/loading.interceptor';
 
@@ -13,6 +12,6 @@ export const appConfig: ApplicationConfig = {
 };
 
 export const AppConfig = {
-  appName: name,
-  appVersion: version,
+  appName: 'heroes-app',
+  appVersion: '1.0.0',
 };

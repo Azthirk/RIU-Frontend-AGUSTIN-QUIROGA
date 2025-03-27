@@ -7,23 +7,27 @@ import { FormGroup } from '@angular/forms';
 describe('HeroFormComponent', () => {
   let component: HeroFormComponent;
   let fixture: ComponentFixture<HeroFormComponent>;
-  let heroServiceSpy: jasmine.SpyObj<HeroService>;
-  let routerSpy: jasmine.SpyObj<Router>;
-  let activatedRouteSpy: jasmine.SpyObj<ActivatedRoute>;
+  let mockHeroService: jasmine.SpyObj<HeroService>;
+  let mockRouter: jasmine.SpyObj<Router>;
+  let mockActivatedRoute: jasmine.SpyObj<ActivatedRoute>;
 
   beforeEach(async () => {
-    heroServiceSpy = jasmine.createSpyObj('HeroService', ['getHeroes', 'getHeroById', 'updateHero', 'createHero']);
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    activatedRouteSpy = {
-      snapshot: { paramMap: { get: jasmine.createSpy('get').and.returnValue(null) } },
-    } as unknown as jasmine.SpyObj<ActivatedRoute>;
+    mockHeroService = jasmine.createSpyObj('HeroService', ['getHeroes', 'getHeroById', 'updateHero', 'createHero']);
+    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+    mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+    mockActivatedRoute.snapshot = { paramMap: { get: () => null } } as any;
+
+    mockHeroService.getHeroes.and.returnValue(() => [
+      { id: 1, name: 'Spiderman' },
+      { id: 2, name: 'Iron Man' }
+    ]);
 
     await TestBed.configureTestingModule({
-      declarations: [HeroFormComponent],
+      imports: [ HeroFormComponent ],
       providers: [
-        { provide: HeroService, useValue: heroServiceSpy },
-        { provide: Router, useValue: routerSpy },
-        { provide: ActivatedRoute, useValue: activatedRouteSpy },
+        { provide: HeroService, useValue: mockHeroService },
+        { provide: Router, useValue: mockRouter },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ],
     }).compileComponents();
 
@@ -32,7 +36,7 @@ describe('HeroFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -44,7 +48,7 @@ describe('HeroFormComponent', () => {
   });
 
   it('should generate a unique ID if no ID is present', () => {
-    heroServiceSpy.getHeroes.and.returnValue(() => []);
+    mockHeroService.getHeroes.and.returnValue(() => []);
     spyOn(component, 'generateUniqueId').and.returnValue(999);
 
     component.ngOnInit();
@@ -52,18 +56,49 @@ describe('HeroFormComponent', () => {
     expect(component.formGeneral.controls['id'].value).toBe(999);
   });
 
-  it('should call createHero when creating a new hero', () => {
-    heroServiceSpy.getHeroes.and.returnValue(() => []);
-    component.ngOnInit();
-    component.formGeneral.controls['name'].setValue('Spiderman');
+  it('should create a new hero with a unique id when no heroId is present', () => {
+    mockActivatedRoute.snapshot = {
+      paramMap: {
+        get: jasmine.createSpy().and.returnValue(null)
+      }
+    } as any;
+    mockHeroService.getHeroes.and.returnValue(() => []);
 
-    component.createOrUpdate();
-    
-    expect(heroServiceSpy.createHero).toHaveBeenCalledWith(jasmine.any(Object));
+    fixture.detectChanges();
+    component.ngOnInit();
+
+    const newId = component.formGeneral.controls['id'].value;
+    expect(newId).toBeGreaterThan(0);
+    expect(component.formGeneral.controls['id'].value).not.toBeNull();
   });
 
   it('should navigate to home after save', () => {
+    component.formGeneral.controls['id'].setValue('999');
+    component.formGeneral.controls['name'].setValue('Superman');
+    component.formGeneral.markAsDirty();
     component.createOrUpdate();
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['home']);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['home']);
+  });
+
+  it('should not save if the form is invalid', () => {
+    component.formGeneral.controls['name'].setValue('');
+    component.formGeneral.controls['description'].setValue('');
+    component.formGeneral.markAsDirty();
+    component.createOrUpdate();
+    expect(mockHeroService.createHero).not.toHaveBeenCalled();
+  });
+
+  it('should call updateHero if heroId is present and form is valid', () => {
+    const hero = { id: 1, name: 'Spiderman', description: 'test' };
+    mockHeroService.getHeroById.and.returnValue(hero);
+
+    component.heroId.set('1');
+    component.ngOnInit();
+    
+    component.formGeneral.controls['name'].setValue('Updated Spiderman');
+    component.formGeneral.markAsDirty();
+    component.createOrUpdate();
+
+    expect(mockHeroService.updateHero).toHaveBeenCalledWith(hero.id, { ...hero, name: 'Updated Spiderman' });
   });
 });

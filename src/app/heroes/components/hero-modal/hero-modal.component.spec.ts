@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeroModalComponent } from './hero-modal.component';
 
 describe('HeroModalComponent', () => {
@@ -8,7 +7,7 @@ describe('HeroModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeroModalComponent]
+      imports: [ HeroModalComponent ]
     })
     .compileComponents();
 
