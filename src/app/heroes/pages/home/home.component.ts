@@ -9,7 +9,4 @@ import { HeroModalComponent } from '../../components/hero-modal/hero-modal.compo
   styleUrl: './home.component.scss',
   standalone: true,
 })
-export class HomeComponent {
-
-
-}
+export class HomeComponent {}

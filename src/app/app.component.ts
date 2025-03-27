@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   appName = AppConfig.appName;
   appVersion = AppConfig.appVersion;
+  title = 'heroes-app'
 
   ngOnInit(): void {
     console.log(this.appName, this.appVersion)
