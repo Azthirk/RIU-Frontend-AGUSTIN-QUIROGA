@@ -51,4 +51,15 @@ describe('HeroService', () => {
     expect(heroes.length).toBe(1);
     expect(heroes[0].name).toBe('Spiderman');
   });
+
+  it('should resolve simulateAsyncOperation after 500ms', (done) => {
+    const start = Date.now();
+    
+    service.simulateAsyncOperation().then(() => {
+      const end = Date.now();
+      
+      expect(end - start).toBeGreaterThanOrEqual(500);
+      done();
+    });
+  });
 });

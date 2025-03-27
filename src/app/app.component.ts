@@ -3,10 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { AppConfig } from './app.config';
 import { HeroHeaderComponent } from './heroes/components/hero-header/hero-header.component';
 import { LoadingService } from './heroes/services/loading.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeroHeaderComponent],
+  imports: [ RouterOutlet, HeroHeaderComponent, MatProgressSpinnerModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
