@@ -4,14 +4,3 @@
 
 # Directories
 node_modules
-/e2e
-/docs
-
-# Git
-.gitignore
-
-# Compressed files
-*.zip
-
-# Documentation
-*.md
