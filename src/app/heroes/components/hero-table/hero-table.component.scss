@@ -151,4 +151,9 @@
     flex: row;
     align-items: center;
     justify-items: center;
+    ::ng-deep{
+        .mat-mdc-paginator-range-label{
+            margin: 0px 16px 0px 16px !important;
+        }
+    }
 }
