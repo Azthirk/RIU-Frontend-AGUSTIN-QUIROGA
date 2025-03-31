@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,7 +6,6 @@ import { Hero } from '../../models/hero.model';
 import { HeroService } from '../../services/hero.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UppercaseDirective } from '../../../shared/directives/uppercase.directive';
-import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-hero-form',

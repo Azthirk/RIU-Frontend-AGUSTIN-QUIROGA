@@ -123,3 +123,32 @@
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
+.totalPages{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+    margin-top: -12px;
+    font-size: 12px;
+    margin-left: 25px;
+    &_input{
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s ease-in-out;
+        height: 20px;
+        width: 35px;
+        font-size: 12px;
+    }
+}
+
+.paginator{
+    display: flex;
+    justify-content: end;
+    flex: row;
+    align-items: center;
+    justify-items: center;
+}

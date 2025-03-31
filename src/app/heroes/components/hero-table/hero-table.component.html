@@ -33,14 +33,26 @@
       }
 
       @if(getTotalHeroes() > 0) {
-        <mat-paginator 
-          (page)="handlePageEvent($event)"
-          [hidePageSize]="true"
-          aria-label="Select page"
-          [pageIndex]="pageIndex()"
-          [length]="getTotalHeroes()"
-          [pageSize]="pageSize()">
-        </mat-paginator>
+        <div class="paginator">
+          <div class="totalPages">
+            <p>Items per page:</p>
+            <input
+              class="totalPages_input"
+              type="text" 
+              placeholder="0" 
+              (input)="changeTotalItems($event)"
+              [value]="pageSize()"
+            />
+          </div>
+          <mat-paginator 
+            (page)="handlePageEvent($event)"
+            [hidePageSize]="true"
+            aria-label="Select page"
+            [pageIndex]="pageIndex()"
+            [length]="getTotalHeroes()"
+            [pageSize]="pageSize()">
+          </mat-paginator>
+        </div>
       } @else {
         <div class="containerBottom">
           <p>There are no heroes available.</p>

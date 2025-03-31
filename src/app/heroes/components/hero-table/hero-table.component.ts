@@ -89,4 +89,12 @@ export class HeroTableComponent {
   redirectToUrl(url: string, item: Hero): void {
     this.router.navigate([url, item.id]);
   }
+
+  changeTotalItems(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = parseInt(input.value, 10);
+    if (Number.isNaN(value) || value <= 0) return;
+    this.pageSize.set(value);
+    this.pageIndex.set(0);
+  }
 }
