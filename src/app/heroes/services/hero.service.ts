@@ -11,8 +11,7 @@ export class HeroService {
     private heroes = signal<Hero[]>([
         { id: 1, name: 'Spiderman' },
         { id: 2, name: 'Iron Man', description: 'test' },
-        { id: 3, name: 'Thor' },
-        { id: 4, name: 'Thorx' },
+        { id: 3, name: 'Thor' }
     ]);
 
     createHero(hero: Hero): void {
